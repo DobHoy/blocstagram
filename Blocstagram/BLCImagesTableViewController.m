@@ -14,6 +14,17 @@
 
 @implementation BLCImagesTableViewController
 
+- (instancetype)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if ( self )
+    {
+        // Write our init code here...
+        self.images = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -23,7 +34,6 @@
         UIImage *image = [UIImage imageNamed:imageName];
         if (image) {
             [self.images addObject:image];
-            
             
         }
     }

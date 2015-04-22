@@ -56,6 +56,21 @@
 
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return YES;
+}
+
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [self.images removeObjectAtIndex:indexPath.row];
+        [tableView reloadData];
+    }
+    
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -86,8 +101,11 @@
 
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     UIImage *image = self.images[indexPath.row];
-    return (CGRectGetWidth(self.view.frame)/image.size.width);
+
+    return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
+
 }
 
 @end

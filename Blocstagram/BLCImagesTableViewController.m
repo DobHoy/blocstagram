@@ -51,19 +51,28 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     return YES;
 }
+
+//- (UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return UITableViewCellEditingStyleInsert;
+//}
 
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        [self.images removeObjectAtIndex:indexPath.row];
-        [tableView reloadData];
+        NSLog(@"I tried to delete");
+    }
+    
+    if (editingStyle == UITableViewCellEditingStyleInsert) {
+        
+        NSLog(@"I tried to insert");
     }
     
 }
+
 
 
 - (NSArray*) items {

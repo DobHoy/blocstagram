@@ -31,17 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    for(int i = 0; i<= 10; i++)
-//    {
-//        NSString *imageName = [NSString stringWithFormat:@"%d.jpg", i];
-//        UIImage *image = [UIImage imageNamed:imageName];
-//        if (image) {
-//            [self.images addObject:image];
-//            
-//        }
-//    }
-//    
+   
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"imageCell"];
 }
 
@@ -65,6 +55,16 @@
     
     return YES;
 }
+
+-(void) setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    
+    if (editing) {
+        
+    }
+    
+}
+
 
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -100,11 +100,7 @@
         imageView.tag = imageViewTag;
         [cell.contentView addSubview:imageView];
         
-        
     }
-    
-//    UIImage *image = self.images[indexPath.row];
-//    imageView.image = image;
 
     BLCMedia *item = [self items][indexPath.row];
     imageView.image = item.image;
@@ -114,8 +110,6 @@
 
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-//    UIImage *image = self.images[indexPath.row];
     
     BLCMedia *item = [self items][indexPath.row];
     UIImage *image = item.image;

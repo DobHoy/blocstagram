@@ -11,6 +11,7 @@
 		9C9BF5B51AEAC897001B816C /* BLCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5B41AEAC897001B816C /* BLCMedia.m */; };
 		9C9BF5B81AEACD53001B816C /* BLCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5B71AEACD53001B816C /* BLCComment.m */; };
 		9C9BF5BB1AEACF7E001B816C /* BLCDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5BA1AEACF7E001B816C /* BLCDataSource.m */; };
+		9C9BF5BE1AEBF070001B816C /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5BD1AEBF070001B816C /* BLCMediaTableViewCell.m */; };
 		9CA803871AE3F69B008837FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA803861AE3F69B008837FF /* main.m */; };
 		9CA8038A1AE3F69B008837FF /* BLCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA803891AE3F69B008837FF /* BLCAppDelegate.m */; };
 		9CA8038C1AE3F69B008837FF /* Blocstagram-Prefix.pch in Resources */ = {isa = PBXBuildFile; fileRef = 9CA8038B1AE3F69B008837FF /* Blocstagram-Prefix.pch */; };
@@ -49,6 +50,8 @@
 		9C9BF5B71AEACD53001B816C /* BLCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCComment.m; sourceTree = "<group>"; };
 		9C9BF5B91AEACF7E001B816C /* BLCDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCDataSource.h; sourceTree = "<group>"; };
 		9C9BF5BA1AEACF7E001B816C /* BLCDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCDataSource.m; sourceTree = "<group>"; };
+		9C9BF5BC1AEBF070001B816C /* BLCMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLCMediaTableViewCell.h; path = ../BLCMediaTableViewCell.h; sourceTree = "<group>"; };
+		9C9BF5BD1AEBF070001B816C /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLCMediaTableViewCell.m; path = ../BLCMediaTableViewCell.m; sourceTree = "<group>"; };
 		9CA803811AE3F69B008837FF /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CA803851AE3F69B008837FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CA803861AE3F69B008837FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				9C9BF5B71AEACD53001B816C /* BLCComment.m */,
 				9C9BF5B91AEACF7E001B816C /* BLCDataSource.h */,
 				9C9BF5BA1AEACF7E001B816C /* BLCDataSource.m */,
+				9C9BF5BC1AEBF070001B816C /* BLCMediaTableViewCell.h */,
+				9C9BF5BD1AEBF070001B816C /* BLCMediaTableViewCell.m */,
 				9CA803A61AE3F76D008837FF /* New Group */,
 				9CA8038B1AE3F69B008837FF /* Blocstagram-Prefix.pch */,
 				9CA8038D1AE3F69B008837FF /* Images.xcassets */,
@@ -301,6 +306,7 @@
 				9CA803C11AE51C49008837FF /* BLCImagesTableViewController.m in Sources */,
 				9C9BF5B51AEAC897001B816C /* BLCMedia.m in Sources */,
 				9C9BF5B81AEACD53001B816C /* BLCComment.m in Sources */,
+				9C9BF5BE1AEBF070001B816C /* BLCMediaTableViewCell.m in Sources */,
 				9C9BF5BB1AEACF7E001B816C /* BLCDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,4 +10,6 @@
 
 @interface BLCLoginViewController : UIViewController
 
+extern NSString *const BLCLoginViewControllerDidGetAccessTokenNotification;
+
 @end

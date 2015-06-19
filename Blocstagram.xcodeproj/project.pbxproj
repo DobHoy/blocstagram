@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79E80A451B2FFBB800A6A3A1 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E80A441B2FFBB800A6A3A1 /* BLCLoginViewController.m */; };
 		9C9BF5B21AEAC5AC001B816C /* BLCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5B11AEAC5AC001B816C /* BLCUser.m */; };
 		9C9BF5B51AEAC897001B816C /* BLCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5B41AEAC897001B816C /* BLCMedia.m */; };
 		9C9BF5B81AEACD53001B816C /* BLCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BF5B71AEACD53001B816C /* BLCComment.m */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		79E80A431B2FFBB800A6A3A1 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
+		79E80A441B2FFBB800A6A3A1 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
 		9C9BF5B01AEAC5AC001B816C /* BLCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCUser.h; sourceTree = "<group>"; };
 		9C9BF5B11AEAC5AC001B816C /* BLCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCUser.m; sourceTree = "<group>"; };
 		9C9BF5B31AEAC897001B816C /* BLCMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMedia.h; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				9C9BF5B71AEACD53001B816C /* BLCComment.m */,
 				9C9BF5B91AEACF7E001B816C /* BLCDataSource.h */,
 				9C9BF5BA1AEACF7E001B816C /* BLCDataSource.m */,
+				79E80A431B2FFBB800A6A3A1 /* BLCLoginViewController.h */,
+				79E80A441B2FFBB800A6A3A1 /* BLCLoginViewController.m */,
 				9C9BF5BC1AEBF070001B816C /* BLCMediaTableViewCell.h */,
 				9C9BF5BD1AEBF070001B816C /* BLCMediaTableViewCell.m */,
 				9CA803A61AE3F76D008837FF /* New Group */,
@@ -308,6 +313,7 @@
 				9C9BF5B81AEACD53001B816C /* BLCComment.m in Sources */,
 				9C9BF5BE1AEBF070001B816C /* BLCMediaTableViewCell.m in Sources */,
 				9C9BF5BB1AEACF7E001B816C /* BLCDataSource.m in Sources */,
+				79E80A451B2FFBB800A6A3A1 /* BLCLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

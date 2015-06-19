@@ -35,6 +35,10 @@
         [navVC setViewControllers:@[imagesVC] animated:YES];
     }];
     
+    //adding a back button
+   
+    
+    
     self.window.rootViewController = navVC;
     
     //init the array?

@@ -16,5 +16,7 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) BLCUser *from;
 
+ - (instancetype) initWithDictionary:(NSDictionary *)commentDictionary;
+
 
 @end

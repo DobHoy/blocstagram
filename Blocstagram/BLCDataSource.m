@@ -73,8 +73,17 @@
     if (self.isRefreshing == NO) {
         self.isRefreshing = YES;
         
+      
+        
         NSString *minID = [[self.mediaItems firstObject] idNumber];
+        
+        NSLog(@"problem here");
+        
         NSDictionary *parameters = @{@"min_id": minID};
+          NSLog(@"dict thing is %@", parameters[@"min_id"]);
+         NSLog(@"problem cont..");
+        
+        NSLog(@"dict thing is %@", parameters[@"min_id"]);
         
         [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
             self.isRefreshing = NO;

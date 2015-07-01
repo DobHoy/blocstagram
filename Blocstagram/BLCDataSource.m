@@ -9,6 +9,7 @@
 #import "BLCLoginViewController.h"
 #import "BLCDataSource.h"
 #import <UIKit/UIKit.h>
+#import <UICKeyChainStore.h>
 #import "BLCUser.h"
 #import "BLCMedia.h"
 #import "BLCComment.h"
@@ -112,6 +113,7 @@
         
         
     }
+
 }
 
 - (void) populateDataWithParameters:(NSDictionary *)parameters completionHandler:(BLCNewItemCompletionBlock)completionHandler {
@@ -205,6 +207,25 @@
         self.mediaItems = tmpMediaItems;
         [self didChangeValueForKey:@"mediaItems"];
     }
+    
+    if ( tmpMediaItems.count > 0 ) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
+            NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+            
+            
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+            NSData  *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
+            
+            NSError *dataError;
+            BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+            
+            if (!wroteSuccessfully) {
+                NSLog(@"Couldn't write file: %@", dataError);
+            }
+            
+        });
+    }
 }
 
 
@@ -222,8 +243,32 @@
       self = [super init];
       
       if(self) {
-//          [self addRandomData];
-          [self registerForAccessTokenNotification];
+          self.accessToken = [UICKeyChainStore stringForKey:@"access token"];
+          
+          if (!self.accessToken) {
+              [self registerForAccessTokenNotification];
+          } else {
+              dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+                  
+                  NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+                  NSArray *storedMediaItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+                  
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      if ( storedMediaItems.count > 0 ) {
+                          NSMutableArray *mutableMediaItems = [storedMediaItems mutableCopy];
+                          
+                          [self willChangeValueForKey:@"mediaItems"];
+                          self.mediaItems = mutableMediaItems;
+                          [self didChangeValueForKey:@"mediaItems"];
+                      } else {
+                          [self populateDataWithParameters:nil completionHandler:nil];
+                          
+                      }
+                  });
+              
+              });
+          }
       }
       return self;
 }
@@ -232,6 +277,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         self.accessToken = note.object;
+        [UICKeyChainStore setString:self.accessToken forKey:@"access token"];
         
         [self populateDataWithParameters:nil completionHandler:nil];
     }];
@@ -267,4 +313,14 @@
         });
     }
 }
+
+- (NSString *) pathForFilename: (NSString *) filename {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:documentsDirectory];
+    
+    return dataPath;
+}
+
 @end

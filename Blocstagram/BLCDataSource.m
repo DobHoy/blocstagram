@@ -74,17 +74,17 @@
     if (self.isRefreshing == NO) {
         self.isRefreshing = YES;
         
-      
-        
-        NSString *minID = [[self.mediaItems firstObject] idNumber];
-        
-        NSLog(@"problem here");
-        
+        NSString *minID = @"";
+        //lets do the case where a refresh happens after all the media items are deleted
+        if ( [self.mediaItems count] == 0 ) {
+            minID = @"";
+        }
+        else {
+            minID = [[self.mediaItems firstObject] idNumber];
+        }
+
         NSDictionary *parameters = @{@"min_id": minID};
-          NSLog(@"dict thing is %@", parameters[@"min_id"]);
-         NSLog(@"problem cont..");
-        
-        NSLog(@"dict thing is %@", parameters[@"min_id"]);
+
         
         [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
             self.isRefreshing = NO;
@@ -213,14 +213,21 @@
             NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
             NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
             
-            
             NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
+
+            BOOL dirExists = [[NSFileManager defaultManager] fileExistsAtPath:[fullPath stringByDeletingLastPathComponent]];
+            if ( !dirExists )
+            { // If the directory doesn't exist, let's create that directory to contain our cache...
+                dirExists = [[NSFileManager defaultManager] createDirectoryAtPath:[fullPath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
+            }
+            
             NSData  *mediaItemData = [NSKeyedArchiver archivedDataWithRootObject:mediaItemsToSave];
             
             NSError *dataError;
             BOOL wroteSuccessfully = [mediaItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
             
             if (!wroteSuccessfully) {
+                
                 NSLog(@"Couldn't write file: %@", dataError);
             }
             
@@ -318,7 +325,7 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths firstObject];
-    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:documentsDirectory];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
     
     return dataPath;
 }

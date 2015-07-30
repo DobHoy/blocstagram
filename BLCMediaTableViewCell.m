@@ -13,7 +13,7 @@
 
 
 
-@interface BLCMediaTableViewCell ()
+@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -35,6 +35,14 @@ static NSParagraphStyle *paragraphStyle;
     
     if(self) {
         self.mediaImageView = [[UIImageView alloc] init];
+        
+        self.mediaImageView.userInteractionEnabled = YES;
+        
+        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+        self.tapGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
+        
+        
         self.usernameAndCaptionLabel = [[UILabel alloc] init];
         self.usernameAndCaptionLabel.numberOfLines = 0;
         self.commentLabel = [[UILabel alloc] init];
@@ -147,6 +155,12 @@ static NSParagraphStyle *paragraphStyle;
     self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height + 20;
     self.commentLabelHeightConstraint.constant = commentLabelSize.height + 20;
     
+        if (_mediaItem.image) {
+            self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+        } else {
+            self.imageHeightConstraint.constant = 0;
+        }
+    
     // Hide the line between cells
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
 }
@@ -179,12 +193,13 @@ static NSParagraphStyle *paragraphStyle;
     self.mediaImageView.image = _mediaItem.image;
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];
+
     
-    if (_mediaItem.image) {
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-    } else {
-        self.imageHeightConstraint.constant = 0;
-    }
+//    if (_mediaItem.image) {
+//        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+//    } else {
+//        self.imageHeightConstraint.constant = 0;
+//    }
     
 }
 
@@ -198,6 +213,16 @@ static NSParagraphStyle *paragraphStyle;
     [super setHighlighted:NO animated:animated];
 }
 
+#pragma mark - Image View
 
+-(void) tapFired: (UITapGestureRecognizer *) sender {
+    [self.delegate cell:self didTapImageView:self.mediaImageView];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return self.isEditing == NO;
+}
 
 @end
